@@ -38,9 +38,8 @@ const main = (url) => new Promise((resolve, reject) => {
         }
     };
     console.log('日志3：'+target)
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            console.log('日志4：'+ response.body)
+    request(options, function (error, response) {
+        if (!error) {
             resolve(response.body)
         } else {
             console.log('日志5：'+error)
