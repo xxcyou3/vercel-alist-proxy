@@ -31,8 +31,8 @@ const main = (url) => new Promise((resolve, reject) => {
         'method': 'GET',
         'url': target,
         'headers': {
-            'Notion-Version': res.headers['notion-version'],
-            'Authorization': res.headers['authorization'],
+            'Notion-Version': url.headers['notion-version'],
+            'Authorization': url.headers['authorization'],
             'Referer': 'https://cowtransfer.com/'
         }
     };
