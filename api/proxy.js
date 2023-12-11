@@ -39,6 +39,7 @@ const main = (url) => new Promise((resolve, reject) => {
     };
     console.log('日志3：'+target)
     request(options, function (error, response) {
+        //?????
         if (!error) {
             resolve(response.body)
         } else {
