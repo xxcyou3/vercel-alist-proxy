@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         }
     }).on('response',function (response) {
         console.log(response.statusCode)
-        this.pipe(res)
+        response.pipe(res)
     })
 }
 
