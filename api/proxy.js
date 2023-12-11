@@ -13,8 +13,17 @@ module.exports = (req, res) => {
 
     main(req)
         .then(req1 => {
-            res.writeHead(200, {"Content-Type": "application/json"});
-            res.write(req1);
+            let Head = {
+            }
+            if (req1.header) {
+                for (const k in req1.header) {
+                    for (const v of req1.header[k]) {
+                        Head.push({k: v})
+                    }
+                }
+            }
+            res.writeHead(200, Head);
+            res.write(req1.body);
             res.end();
         })
         .catch(req1 => {
@@ -40,7 +49,7 @@ const main = (url) => new Promise((resolve, reject) => {
     request(options, function (error, response) {
         //?????
         if (!error) {
-            resolve(response.body)
+            resolve(response)
         } else {
             console.log('日志5：'+error)
             reject(error);
