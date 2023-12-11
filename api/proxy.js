@@ -2,10 +2,12 @@ const request = require('request');
 module.exports = (req, res) => {
     let prefix = "/img/tibet-1.jpg"
     let prefix1 = "/favicon.ico"
-    if (!req.url.startsWith(prefix)) {
+    if (req.url.startsWith(prefix)) {
+        res.end();
         return;
     }
-    if (!req.url.startsWith(prefix1)) {
+    if (req.url.startsWith(prefix1)) {
+        res.end();
         return;
     }
 
