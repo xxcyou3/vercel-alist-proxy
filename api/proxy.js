@@ -27,14 +27,13 @@ module.exports = (req, res) => {
 
 const main = (url) => new Promise((resolve, reject) => {
     console.log('日志：'+url.url)
-    let target = "https://y4cc.cc/s" + url.url;
+    let target = "https://y4cc.cc/l" + url.url;
     let options = {
         'method': 'GET',
         'url': target,
         'headers': {
             'Notion-Version': url.headers['notion-version'],
-            'Authorization': url.headers['authorization'],
-            'Referer': 'https://cowtransfer.com/'
+            'Authorization': url.headers['authorization']
         }
     };
     console.log('日志3：'+target)
