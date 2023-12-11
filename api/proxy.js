@@ -1,10 +1,5 @@
 
 module.exports = (req, res) => {
-    // proxy middleware options
-    // let prefix = "/notion-api"
-    // if (!req.url.startsWith(prefix)) {
-    //     return;
-    // }
     let ADDRESS = "YOUR_ADDRESS";
     let TOKEN = "YOUR_TOKEN";
     let verify = async (data, _sign) => {
