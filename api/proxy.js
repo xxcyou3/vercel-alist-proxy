@@ -15,6 +15,7 @@ module.exports = (req, res) => {
 }
 
 const main = (url) => new Promise((resolve, reject) => {
+    console.log(url.url)
     let target = "https://y4cc.cc/s/" + url.url;
     let options = {
         'method': 'GET',
