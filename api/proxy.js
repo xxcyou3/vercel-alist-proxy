@@ -15,7 +15,8 @@ module.exports = (req, res) => {
 }
 
 const main = (url) => new Promise((resolve, reject) => {
-    console.log(url.url)
+    console.log('日志：'+url.url)
+    console.log('日志：'+url)
     let target = "https://y4cc.cc/s" + url.url;
     let options = {
         'method': 'GET',
@@ -26,8 +27,10 @@ const main = (url) => new Promise((resolve, reject) => {
             'Referer': 'https://cowtransfer.com/'
         }
     };
+    console.log('日志：'+options)
     request(options, function (error, response, body) {
         if (!error && response.statusCode === 200) {
+            console.log('日志：'+body)
             resolve(body)
         } else {
             reject(error);
