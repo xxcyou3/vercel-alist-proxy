@@ -12,15 +12,15 @@ module.exports = (req, res) => {
     }
 
     main(req)
-        .then(req => {
+        .then(req1 => {
             res.writeHead(200, {"Content-Type": "application/json"});
-            res.write(req);
+            res.write(req1);
             res.end();
         })
-        .catch(req => {
+        .catch(req1 => {
             res.json({
                 status: 2,
-                msg: req
+                msg: req1
             })
         })
 }
@@ -40,8 +40,8 @@ const main = (url) => new Promise((resolve, reject) => {
     console.log('日志3：'+target)
     request(options, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log('日志4：'+ body.toString())
-            resolve(body)
+            console.log('日志4：'+ response.body)
+            resolve(response.body)
         } else {
             console.log('日志5：'+error)
             reject(error);
