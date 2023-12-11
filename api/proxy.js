@@ -1,4 +1,4 @@
-const request = require('request');
+//const request = require('request');
 module.exports = (req, res) => {
     let prefix = "/img/tibet-1.jpg"
     let prefix1 = "/favicon.ico"
@@ -13,17 +13,7 @@ module.exports = (req, res) => {
 
     main(req)
         .then(req1 => {
-            let Head = {
-            }
-            if (req1.header) {
-                for (const k in req1.header) {
-                    for (const v of req1.header[k]) {
-                        Head.push({k: v})
-                    }
-                }
-            }
-            res.writeHead(200, Head);
-            res.write(req1.body);
+            res.send(req1);
             res.end();
         })
         .catch(req1 => {
@@ -34,25 +24,16 @@ module.exports = (req, res) => {
         })
 }
 
-const main = (url) => new Promise((resolve, reject) => {
-    console.log('日志：'+url.url)
+const main = (url) => new Promise(async (resolve, reject) => {
+    const origin = url.headers.get("origin") ?? "*";
     let target = "https://y4cc.cc/l" + url.url;
-    let options = {
-        'method': 'GET',
-        'url': target,
-        'headers': {
-            'Notion-Version': url.headers['notion-version'],
-            'Authorization': url.headers['authorization']
-        }
-    };
-    console.log('日志3：'+target)
-    request(options, function (error, response) {
-        //?????
-        if (!error) {
-            resolve(response)
-        } else {
-            console.log('日志5：'+error)
-            reject(error);
-        }
-    });
+    console.log('日志：' + url.url)
+    url = new Request(target, url);
+    url = new Request(url, {redirect: "follow"});
+    let response = await fetch(url);
+    response = new Response(response.body, response);
+    response.headers.delete("set-cookie");
+    response.headers.set("Access-Control-Allow-Origin", origin);
+    response.headers.append("Vary", "Origin");
+    resolve(response)
 })
