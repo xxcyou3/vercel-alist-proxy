@@ -1,5 +1,14 @@
 const request = require('request');
 module.exports = (req, res) => {
+    let prefix = "/img/tibet-1.jpg"
+    let prefix1 = "/favicon.ico"
+    if (!req.url.startsWith(prefix)) {
+        return;
+    }
+    if (!req.url.startsWith(prefix1)) {
+        return;
+    }
+
     main(req)
         .then(req => {
             res.writeHead(200, {"Content-Type": "application/json"});
@@ -16,7 +25,7 @@ module.exports = (req, res) => {
 
 const main = (url) => new Promise((resolve, reject) => {
     console.log('日志：'+url.url)
-    console.log('日志：'+url)
+    console.log('日志2：'+url)
     let target = "https://y4cc.cc/s" + url.url;
     let options = {
         'method': 'GET',
@@ -27,10 +36,10 @@ const main = (url) => new Promise((resolve, reject) => {
             'Referer': 'https://cowtransfer.com/'
         }
     };
-    console.log('日志：'+options)
+    console.log('日志3：'+options)
     request(options, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log('日志：'+body)
+            console.log('日志4：'+body)
             resolve(body)
         } else {
             reject(error);
